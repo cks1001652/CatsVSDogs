@@ -1,0 +1,75 @@
+
+
+```{r}
+library(data.table)
+library(lattice)
+library(ggplot2)
+library(caret)
+library(Momocs)
+library(EBImage)
+
+#import images
+dir_images <- "~/Desktop/project3/images" #;dir_images
+dir_names <- list.files(dir_images)#;dir_names
+breed_name <- rep(NA, length(dir_names))
+
+for(i in 1:length(dir_names)){
+  tt <- unlist(strsplit(dir_names[i], "_"))
+  tt <- tt[-length(tt)]
+  breed_name[i] = paste(tt, collapse="_", sep="")
+}
+
+breed_name
+
+cat_breed <- c("Abyssinian", "Bengal", "Birman", "Bombay", "British_Shorthair", "Egyptian_Mau","Maine_Coon", "Persian", "Ragdoll", "Russian_Blue", "Siamese", "Sphynx")
+
+iscat <- breed_name %in% cat_breed;iscat
+y_cat <- as.numeric(iscat)
+
+#labels
+#y_cat
+
+#Split test and train data
+set.seed(123)
+trainindex <- createDataPartition(y_cat, p = .75, list = FALSE,times = 1)
+trainname <- dir_names[trainindex]
+testname <- dir_names[-trainindex]
+trainlabel <- as.factor(y_cat[trainindex])
+testlabel <- as.factor(y_cat[-trainindex])
+```
+
+```{r}
+img_test_dir <- img_train_dir <- "~/Desktop/project3/images/"
+#img_name <- testname
+#img_dir <- "~/Desktop/project3/images/"
+
+feature <- function(img_dir,img_name,data_name = NULL){
+
+  n <- length(img_name)
+  #n <- 50
+  dat <- list()
+  for(i in 1:n){
+    if(trunc(i/5)*5==i){print(i)}
+    #read images
+    #mat <- readImage(paste0(img_dir,img_name)[i]) #;display(mat)
+    mat_size <- resize(readImage(paste0(img_dir,img_name)[i]),128,128)
+    img <- channel(mat_size, mode="gray") #;display(img)
+    final_img <- thresh(img, w = 50, h = 50, offset = 0.05) #;display(final_img)
+    oc <- ocontour(bwlabel(final_img)) #;oc
+    max <- c()
+    for(j in 1:length(oc)){
+     max[j] <- nrow(oc[[j]])
+    }
+    #max
+    #plot(oc[[which.max(max)]], type='l')
+    coo <- coo_sample(oc[[which.max(max)]], 40) #;coo
+    #coo %>% coo_plot(points=TRUE)
+    dat[[i]] <- coo
+  }
+  return(dat)
+}
+
+data <- feature(img_test_dir, testname)
+
+```
+
