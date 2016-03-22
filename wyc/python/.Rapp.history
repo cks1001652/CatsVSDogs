@@ -1,0 +1,645 @@
+data1 <- tbl_df(data1)#
+ds <- 	data1	%>%#
+		na.omit()	%>%#
+		filter(FES	%in%	c(1,2,3,4))	%>%#
+		group_by(FES)#
+rm(data1)
+fescode <- "FES,MarriedFamilyEmployType#
+1,BothinLF#
+2,HusbandinLF#
+3,WifeinLF#
+4,NeitherinLF"#
+fescodes <- fread(fescode)
+fesnumbers <- summarise(ds,count=n())
+fesnumbers <- left_join(fesnumbers,fescodes,by.x=c("FES"))
+Types <- factor(fesnumbers$MarriedFamilyEmployType,levels=unique(fesnumbers$MarriedFamilyEmployType))
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Type)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=40) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 30, hjust = 1),#
+     panel.background = element_rect(fill = 'white' ))
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Types)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=40) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 30, hjust = 1),#
+     panel.background = element_rect(fill = 'white' ))
+fescode <- "FES,MarriedFamilyEmployType#
+1,Both in LF#
+2,Husband in LF#
+3,Wife in LF#
+4,Neither in LF"#
+fescodes <- fread(fescode)#
+#
+fesnumbers <- summarise(ds,count=n())#
+fesnumbers <- left_join(fesnumbers,fescodes,by.x=c("FES"))#
+Types <- factor(fesnumbers$MarriedFamilyEmployType,levels=unique(fesnumbers$MarriedFamilyEmployType))#
+#
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Types)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=40) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 30, hjust = 1),#
+     panel.background = element_rect(fill = 'white' ))
+fescode <- "FES,MarriedFamilyEmployType#
+1,Both in Labor Force#
+2,Husband in Labor Force#
+3,Wife in Labor Force#
+4,Neither in Labor Force"#
+fescodes <- fread(fescode)#
+#
+fesnumbers <- summarise(ds,count=n())#
+fesnumbers <- left_join(fesnumbers,fescodes,by.x=c("FES"))#
+Types <- factor(fesnumbers$MarriedFamilyEmployType,levels=unique(fesnumbers$MarriedFamilyEmployType))#
+#
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Types)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=40) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 30, hjust = 1),#
+     panel.background = element_rect(fill = 'white' ))
+fescode <- "FES,MarriedFamilyEmployType#
+1,Both in Labor Force#
+2,Husband in Labor Force#
+3,Wife in Labor Force#
+4,Neither in Labor Force"#
+fescodes <- fread(fescode)#
+#
+fesnumbers <- summarise(ds,count=n())#
+fesnumbers <- left_join(fesnumbers,fescodes,by.x=c("FES"))#
+Types <- factor(fesnumbers$MarriedFamilyEmployType,levels=unique(fesnumbers$MarriedFamilyEmployType))#
+#
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Types)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=40) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 10, hjust = 1),#
+     panel.background = element_rect(fill = 'white' ))
+fescode <- "FES,MarriedFamilyEmployType#
+1,Both in Labor Force#
+2,Husband in Labor Force#
+3,Wife in Labor Force#
+4,Neither in Labor Force"#
+fescodes <- fread(fescode)#
+#
+fesnumbers <- summarise(ds,count=n())#
+fesnumbers <- left_join(fesnumbers,fescodes,by.x=c("FES"))#
+Types <- factor(fesnumbers$MarriedFamilyEmployType,levels=unique(fesnumbers$MarriedFamilyEmployType))#
+#
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Types)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=40) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 10, hjust = 2),#
+     panel.background = element_rect(fill = 'white' ))
+fescode <- "FES,MarriedFamilyEmployType#
+1,Both in Labor Force#
+2,Husband in Labor Force#
+3,Wife in Labor Force#
+4,Neither in Labor Force"#
+fescodes <- fread(fescode)#
+#
+fesnumbers <- summarise(ds,count=n())#
+fesnumbers <- left_join(fesnumbers,fescodes,by.x=c("FES"))#
+Types <- factor(fesnumbers$MarriedFamilyEmployType,levels=unique(fesnumbers$MarriedFamilyEmployType))#
+#
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Types)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=40) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 10, hjust = 0.5),#
+     panel.background = element_rect(fill = 'white' ))
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Types)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=30) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 10, hjust = 0.5),#
+     panel.background = element_rect(fill = 'white' ))
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Types)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=20) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 10, hjust = 0.5),#
+     panel.background = element_rect(fill = 'white' ))
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Types)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=30) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 10, hjust = 0.5),#
+     panel.background = element_rect(fill = 'white' ))
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Types)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=50) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 10, hjust = 0.5),#
+     panel.background = element_rect(fill = 'white' ))
+data1$FINCP
+ds
+data1
+ds
+ds$FINCP
+summary(ds$FINCP)
+ds
+firstquan <- ds	%>%#
+			filter(FINCP>=45800)		%>%#
+			group_by(FES)	%>%#
+			summarise(count	=	n())		%>%#
+			mutate(Percent	=	count/fesnumbers$count*100)
+ggplot(firstquan, aes(x= Types , y=firstquan$Percent, fill= Types)) +                        #
+       geom_bar(stat="identity") + scale_fill_hue(l=80) +#
+       ylab("Percent %") + #
+       xlab("Employment Status") + ggtitle("Percentages of Married Family with more than 1st quantile income under different Employment Status")+#
+       theme(axis.text.x = element_text(angle = 30, hjust = 1),#
+       panel.background = element_rect(fill = 'white' ))
+firstquan <- ds	%>%#
+			filter(FINCP>=45800)		%>%#
+			group_by(FES)	%>%#
+			summarise(count	=	n())		%>%#
+			mutate(Percent	=	count/fesnumbers$count*100)#
+ggplot(firstquan, aes(x= Types , y=firstquan$Percent, fill= Types)) +                        #
+       geom_bar(stat="identity") + scale_fill_hue(l=80) +#
+       ylab("Percent %") + #
+       xlab("Employment Status") + ggtitle("Percentages of different Employment Status")+#
+       theme(axis.text.x = element_text(angle = 30, hjust = 1),#
+       panel.background = element_rect(fill = 'white' ))
+ggplot(firstquan, aes(x= Types , y=firstquan$Percent, fill= Types)) +                        #
+       geom_bar(stat="identity") + scale_fill_hue(l=80) +#
+       ylab("Percent %") + #
+       xlab("Employment Status") + ggtitle("Percentages of different Employment Status")+#
+       theme(axis.text.x = element_text(angle = 10, hjust = 0.5),#
+       panel.background = element_rect(fill = 'white' ))
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Types)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=50) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 10, hjust = 0.5),#
+     panel.background = element_rect(fill = 'white' ))
+ggplot(firstquan, aes(x= Types , y=firstquan$Percent, fill= Types)) +                        #
+       geom_bar(stat="identity") + scale_fill_hue(l=80) +#
+       ylab("Percent %") + #
+       xlab("Employment Status") + ggtitle("Percentages of different Employment Status")+#
+       theme(axis.text.x = element_text(angle = 10, hjust = 0.5),#
+       panel.background = element_rect(fill = 'white' ))
+ggplot(fesnumbers, aes(x= Types , y=fesnumbers$count, fill= Types)) +                        #
+     geom_bar(stat="identity") + scale_fill_hue(l=50) +#
+     ylab("Num of People") + #
+     xlab("Employment Status") + ggtitle("Comparing Enployment status of Married Family in the US") +#
+     theme(axis.text.x = element_text(angle = 10, hjust = 0.5),#
+     panel.background = element_rect(fill = 'white' ))
+ggplot(firstquan, aes(x= Types , y=firstquan$Percent, fill= Types)) +                        #
+       geom_bar(stat="identity") + scale_fill_hue(l=80) +#
+       ylab("Percent %") + #
+       xlab("Employment Status") + ggtitle("Percentages of different Employment Status")+#
+       theme(axis.text.x = element_text(angle = 10, hjust = 0.5),#
+       panel.background = element_rect(fill = 'white' ))
+firstquan <- ds	%>%#
+			filter(FINCP>=77000)		%>%#
+			group_by(FES)	%>%#
+			summarise(count	=	n())		%>%#
+			mutate(Percent	=	count/fesnumbers$count*100)#
+ggplot(firstquan, aes(x= Types , y=firstquan$Percent, fill= Types)) +                        #
+       geom_bar(stat="identity") + scale_fill_hue(l=80) +#
+       ylab("Percent %") + #
+       xlab("Employment Status") + ggtitle("Percentages of different Employment Status")+#
+       theme(axis.text.x = element_text(angle = 10, hjust = 0.5),#
+       panel.background = element_rect(fill = 'white' ))
+ds$ST
+levels(ds$ST)
+summary(ds$ST)
+stateCodes <- fread(stateCodeCSV)
+stateCodeCSV <- "ST,region     #
+1	,	AL        2	,	AK         4	,	AZ        5	,	AR       6	,	CA     8	,	CO       9	,	CT    10	,	DE       11	,	DC      12	,	FL        13	,	GA        15	,	HI         16	,	ID          17	,	IL       18	,	IN        19	,	IA20	,	KS         21	,	KY       22	,	LA      23	,	ME          24	,	MD       25	,	MA  26	,	MI       27	,	MN      28	,	MS    29	,	MO       30	,	MT        31	,	NE       32	,	NV         33	,	NH  34	,	NJ     35	,	NM     36	,	NY       37	,	NC 38	,	ND   39	,	OH40	,	OK       41	,	OR         42	,	PA   44	,	RI   45	,	SC 46	,	SD   47	,	TN      48	,	TX          49	,	UT50	,	VT        51	,	VA       53	,	WA     54	,	WV  55	,	WI      56	,	WY "#
+stateCodes <- fread(stateCodeCSV)
+stateTotalBoth <- ds	%>%#
+				  filter(FES==1)		%>%#
+				  group_by(ST)	%>%#
+				  summarise(count=n())
+medianper <- ds	%>%#
+			filter(FINCP>=77000)		%>%#
+			group_by(FES)	%>%#
+			summarise(count	=	n())		%>%#
+			mutate(Percent	=	count/fesnumbers$count*100)#
+ggplot(medianper, aes(x= Types , y=medianper$Percent, fill= Types)) +                        #
+       geom_bar(stat="identity") + scale_fill_hue(l=80) +#
+       ylab("Percent %") + #
+       xlab("Employment Status") + ggtitle("Percentages of different Employment Status")+#
+       theme(axis.text.x = element_text(angle = 10, hjust = 0.5),#
+       panel.background = element_rect(fill = 'white' ))
+medianBoth <- ds	%>%#
+				filter(FES==1,FINCP>=77000)	%>%#
+				group_by(ST)		%>%#
+				summarise(count=n())#
+medianBoth <- right_join(medianBoth,stateCodes,by.x=c("ST"))#
+medianBoth[is.na(medianBoth)] <- 0#
+medianBoth <- mutate(medianBoth,value=medianBoth$count/stateTotalBoth$count*100)
+stateTotalBoth <- ds	%>%#
+				  filter(FES==1)		%>%#
+				  group_by(ST)	%>%#
+				  summarise(count=n())#
+medianBoth <- ds	%>%#
+				filter(FES==1,FINCP>=77000)	%>%#
+				group_by(ST)		%>%#
+				summarise(count=n())#
+medianBoth <- right_join(medianBoth,stateCodes,by.x=c("ST"))#
+medianBoth[is.na(medianBoth)] <- 0#
+medianBoth <- mutate(medianBoth,value=medianBoth$count/stateTotalBoth$count*100)
+stateCodeCSV <- "ST,region     #
+1	,	AL        2	,	AK         4	,	AZ        5	,	AR       6	,	CA     8	,	CO       9	,	CT    10	,	DE       11	,	DC      12	,	FL        13	,	GA        15	,	HI         16	,	ID          17	,	IL       18	,	IN        19	,	IA20	,	KS         21	,	KY       22	,	LA      23	,	ME          24	,	MD       25	,	MA  26	,	MI       27	,	MN      28	,	MS    29	,	MO       30	,	MT        31	,	NE       32	,	NV         33	,	NH  34	,	NJ     35	,	NM     36	,	NY       37	,	NC 38	,	ND   39	,	OH40	,	OK       41	,	OR         42	,	PA   44	,	RI   45	,	SC 46	,	SD   47	,	TN      48	,	TX          49	,	UT50	,	VT        51	,	VA       53	,	WA     54	,	WV  55	,	WI      56	,	WY"#
+stateCodes <- fread(stateCodeCSV)
+stateTotalBoth <- ds	%>%#
+				  filter(FES==1)		%>%#
+				  group_by(ST)	%>%#
+				  summarise(count=n())
+medianBoth <- ds	%>%#
+				filter(FES==1,FINCP>=77000)	%>%#
+				group_by(ST)		%>%#
+				summarise(count=n())
+medianBoth <- right_join(medianBoth,stateCodes,by.x=c("ST"))
+medianBoth[is.na(medianBoth)] <- 0
+medianBoth <- mutate(medianBoth,value=medianBoth$count/stateTotalBoth$count*100)
+medianBoth <- right_join(medianBoth,stateTotalBoth,by.x=c("ST"))
+medianBoth[is.na(medianBoth)] <- 0
+medianBoth <- mutate(medianBoth,value=medianBoth$count/stateTotalBoth$count*100)
+state_choropleth(medianBoth,title="Percentage of Both People in labor earning more than 77000")
+state_choropletr(medianBoth,title="Percentage of Both People in labor earning more than 77000")
+state_choropleth(medianBoth,title="Percentage of Both People in labor earning more than 77000")
+state_choropleth(medianBoth,title="Percentage of Both People in labor earning more than 77000",number=9)
+library("choroplethr")
+state_choropleth(medianBoth,title="Percentage of Both People in labor earning more than 77000",number=9)
+library("ggplot2")
+library("choroplethr")
+library("ggplot2")
+prior <- function(theta){#
+	if (theta>=0 & theta<=0.385) {return(0.5)}#
+	if (theta>0.385 & theta<=0.485) {return(50*theta-18.75)}#
+	if (theta>0.485 & theta<=0.585) {return(-50*theta+29.75)}#
+	if (theta>0.585 & theta<=1) {return(0.5)}#
+}
+posterior <- function(theta,n,y){#
+	if (theta>=0 & theta<=0.385) {return((theta^y)*(1-theta)^(n-y)))}#
+	if (theta>0.385 & theta<=0.485) {return((50*theta-18.75)*(theta^y)*(1-theta)^(n-y)))}#
+	if (theta>0.485 & theta<=0.585) {return((-50*theta+29.75)*(theta^y)*(1-theta)^(n-y)))}#
+	if (theta>0.585 & theta<=1) {return((theta^y)*(1-theta)^(n-y)))}#
+#
+}
+posterior <- function(theta,n,y){
+if (theta>=0 & theta<=0.385) {return((theta^y)*(1-theta)^(n-y)))}
+posterior <- function(theta,n,y){#
+	if (theta>=0 & theta<=0.385) {return((theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.385 & theta<=0.485) {return((50*theta-18.75)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.485 & theta<=0.585) {return((-50*theta+29.75)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.585 & theta<=1) {return((theta^y)*(1-theta)^(n-y))}#
+#
+}
+theta <- seq(0,1,1000)
+theta
+?seq
+theta <- seq(from=0,to=1, by=0.001)
+theta
+posterior(theta,n,y)
+n=980
+y=437
+posterior(theta,n,y)
+(theta^y)*(1-theta)^(n-y)
+n=437
+y=980
+result <- rep(NA,1000)
+result
+theta <- 0
+n=437
+y=980
+theta <- 0
+result <- rep(NA,1001)
+for(i in 1:1001){result[i] <- posterior(theta+(i-1)/1000,n,y)}
+result
+posresult <- for(i in 1:1001){result[i] <- posterior(theta+(i-1)/1000,n,y)}
+hist(posresult)
+plot(posresult)
+posterior <- function(theta,n,y){#
+	if (theta>=0 & theta<=0.385) {return(0.5*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.385 & theta<=0.485) {return((50*theta-18.75)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.485 & theta<=0.585) {return((-50*theta+29.75)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.585 & theta<=1) {return(0.5*(theta^y)*(1-theta)^(n-y))}#
+#
+}#
+#
+n=437#
+y=980#
+theta <- 0#
+result <- rep(NA,1001)#
+posresult <- for(i in 1:1001){result[i] <- posterior(theta+(i-1)/1000,n,y)}#
+#
+plot(posresult)
+posresult
+plot(result)
+hist(result)
+hist(,seq(0,1,by=0.01),result)
+hist(seq(0,1,by=0.01),result)
+plot(seq(0,1,by=0.01),result)
+plot(seq(0,1,by=0.001),result)
+hist(seq(0,1,by=0.001),result)
+result
+hist(seq(0.385,0.585,by=0.001),result[386,586])
+hist(seq(0.385,0.586,by=0.001),result[386,586])
+hist(seq(0.385,0.584,by=0.001),result[386,586])
+result[386,586]
+hist(seq(0.385,0.584,by=0.001),result(386,586))
+hist(seq(0.385,0.584,by=0.001),result[386:586])
+result[386:586]
+hist(seq(0.385,0.585,by=0.001),result[386:586])
+hist(seq(0.385,0.586,by=0.001),result[386:586])
+prior(seq(0,1,by=0.001))
+seq(0,1,by=0.001)
+prior(0)
+prior(0.001)
+prior(0.002)
+theta <- seq(0,1,0.001)
+prior(theta)
+prior <- function(theta){#
+	if (theta>=0 && theta<=0.385) {return(0.5)}#
+	if (theta>0.385 && theta<=0.485) {return(50*theta-18.75)}#
+	if (theta>0.485 && theta<=0.585) {return(-50*theta+29.75)}#
+	if (theta>0.585 && theta<=1) {return(0.5)}#
+}
+prior(0.385)
+prior(0.386)
+prior(0.387)
+prior(0.388)
+prior(0.389)
+prior(0.556)
+result <- rep(NA,1001)
+for(i in 1:1001){result[i] <- prior(theta+(i-1)/1000)}
+result
+warnings
+warning\
+warning()
+warnings()
+result <- rep(NA,1001)#
+for(i in 1:1001){result[i] <- prior(theta+(i-1)/1000)}
+warnings()
+result[0]
+result[2]
+result[1]
+theta <- 0
+result <- rep(NA,1001)
+for(i in 1:1001){result[i] <- prior((i-1)/1000)}
+prior <- function(theta){#
+	if (theta>=0 && theta<=0.385) {return(0.5)}#
+	if (theta>0.385 && theta<=0.485) {return(50*theta-18.75)}#
+	if (theta>0.485 && theta<=0.585) {return(-50*theta+29.75)}#
+	if (theta>0.585 && theta<=1) {return(0.5)}#
+}#
+#
+priorresult <- rep(NA,1001)#
+for(i in 1:1001){result[i] <- prior((i-1)/1000)}
+posresult <- for(i in 1:1001){result[i] <- posterior((i-1)/1000,n,y)}
+result
+posresult <- for(i in 1:1001){result[i] <- posterior(priorrest[i],n,y)}
+posresult <- for(i in 1:1001){result[i] <- posterior(priorresult[i],n,y)}
+priorresult[i]
+i
+prior <- function(theta){#
+	if (theta>=0 && theta<=0.385) {return(0.5)}#
+	if (theta>0.385 && theta<=0.485) {return(50*theta-18.75)}#
+	if (theta>0.485 && theta<=0.585) {return(-50*theta+29.75)}#
+	if (theta>0.585 && theta<=1) {return(0.5)}#
+}#
+#
+priorresult <- rep(NA,1001)#
+for(i in 1:1001){result[i] <- prior((i-1)/1000)}
+posresult <- for(i in 1:1001){result[i] <- posterior(priorresult[i],n,y)}
+result <- rep(NA,1001)
+posresult <- for(i in 1:1001){result[i] <- posterior(priorresult[i],n,y)}
+priorresult[1]
+priorresult[2]
+prior <- function(theta){#
+	if (theta>=0 && theta<=0.385) {return(0.5)}#
+	if (theta>0.385 && theta<=0.485) {return(50*theta-18.75)}#
+	if (theta>0.485 && theta<=0.585) {return(-50*theta+29.75)}#
+	if (theta>0.585 && theta<=1) {return(0.5)}#
+}#
+#
+priorresult <- rep(NA,1001)#
+for(i in 1:1001){priorresult[i] <- prior((i-1)/1000)}
+n=437
+y=980
+posresult <- rep(NA,1001)
+for(i in 1:1001){posresult[i] <- posterior(priorresult[i],n,y)}
+priorresult
+posresult
+posterior(priorresult[1],n,y)
+posterior(priorresult[2],n,y)
+posterior(priorresult[400],n,y)
+posterior(priorresult[500],n,y)
+priorresult[500]
+max(priorresult)
+prior <- function(theta){#
+	if (theta>=0 && theta<=0.385) {return(0.5)}#
+	if (theta>0.385 && theta<=0.485) {return(50*theta-18.75)}#
+	if (theta>0.485 && theta<=0.585) {return(-50*theta+29.75)}#
+	if (theta>0.585 && theta<=1) {return(0.5)}#
+}#
+#
+priorresult <- rep(NA,1001)#
+for(i in 1:1001){priorresult[i] <- prior((i-1)/1000)}
+posterior <- function(theta,n,y){#
+	if (theta>=0 && theta<=0.5) {return(prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.385 & theta<=0.485) {return(prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.485 & theta<=0.585) {return(prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.585 & theta<=1) {return(prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+#
+}
+n=437#
+y=980#
+posresult <- rep(NA,1001)#
+ for(i in 1:1001){posresult[i] <- posterior((i-1)/1000,n,y)}
+plot(posresult)
+posresult
+prior <- function(theta){#
+	if (theta>=0 && theta<=0.385) {return(0.5)}#
+	if (theta>0.385 && theta<=0.485) {return(50*theta-18.75)}#
+	if (theta>0.485 && theta<=0.585) {return(-50*theta+29.75)}#
+	if (theta>0.585 && theta<=1) {return(0.5)}#
+}#
+#
+priorresult <- rep(NA,1001)#
+for(i in 1:1001){priorresult[i] <- prior((i-1)/1000)}#
+#
+max(priorresult)#
+#
+posterior <- function(theta,n,y){#
+	if (theta>=0 && theta<=0.5) {return(combn(y,n)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.385 & theta<=0.485) {return(combn(y,n)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.485 & theta<=0.585) {return(combn(y,n)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.585 & theta<=1) {return(combn(y,n)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+#
+}#
+n=437#
+y=980#
+posresult <- rep(NA,1001)#
+ for(i in 1:1001){posresult[i] <- posterior((i-1)/1000,n,y)}#
+plot(posresult)
+for(i in 1:1001){posresult[i] <- posterior((i-1)/1000,n,y)}
+prior <- function(theta){#
+	if (theta>=0 && theta<=0.385) {return(0.5)}#
+	if (theta>0.385 && theta<=0.485) {return(50*theta-18.75)}#
+	if (theta>0.485 && theta<=0.585) {return(-50*theta+29.75)}#
+	if (theta>0.585 && theta<=1) {return(0.5)}#
+}#
+#
+priorresult <- rep(NA,1001)#
+for(i in 1:1001){priorresult[i] <- prior((i-1)/1000)}#
+#
+max(priorresult)#
+#
+posterior <- function(theta,n,y){#
+	if (theta>=0 && theta<=0.5) {return(combn(y,n)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.385 & theta<=0.485) {return(combn(y,n)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.485 & theta<=0.585) {return(combn(y,n)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.585 & theta<=1) {return(combn(y,n)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+#
+}#
+n=980#
+y=437#
+posresult <- rep(NA,1001)#
+ for(i in 1:1001){posresult[i] <- posterior((i-1)/1000,n,y)}#
+plot(posresult)
+posterior <- function(theta,n,y){#
+	if (theta>=0 && theta<=0.5) {return(combn(n,y)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.385 & theta<=0.485) {return(combn(n,y)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.485 & theta<=0.585) {return(combn(n,y)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.585 & theta<=1) {return(combn(n,y)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+#
+}
+n=980#
+y=437#
+posresult <- rep(NA,1001)#
+ for(i in 1:1001){posresult[i] <- posterior((i-1)/1000,n,y)}
+warnings()
+combn(980,437)
+combn(437,980)
+combn(980,437)
+choose(980,437)
+prior <- function(theta){#
+	if (theta>=0 && theta<=0.385) {return(0.5)}#
+	if (theta>0.385 && theta<=0.485) {return(50*theta-18.75)}#
+	if (theta>0.485 && theta<=0.585) {return(-50*theta+29.75)}#
+	if (theta>0.585 && theta<=1) {return(0.5)}#
+}#
+#
+priorresult <- rep(NA,1001)#
+for(i in 1:1001){priorresult[i] <- prior((i-1)/1000)}#
+posterior <- function(theta,n,y){#
+	if (theta>=0 && theta<=0.5) {return(choose(n,y)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.385 & theta<=0.485) {return(choose(n,y)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.485 & theta<=0.585) {return(choose(n,y)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.585 & theta<=1) {return(choose(n,y)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+#
+}#
+n=980#
+y=437#
+posresult <- rep(NA,1001)#
+ for(i in 1:1001){posresult[i] <- posterior((i-1)/1000,n,y)}#
+plot(posresult)
+hist(posresult)
+hist(seq(0,1,by=0.01),posresult)
+for(i in 1:1001){posresult[i] <- posterior((i-1)/1000,n,y)}
+posresult
+plot(posresult)
+plot(posresult,type=l,main='Posterior Density',xlab='theta',xlim=c(0,1,0.001))
+plot(posresult,type=l,main='Posterior Density',xlab='theta',xlim=seq(0,1,0.001))
+plot(posresult,type=l,main='Posterior Density',xlab='theta')
+plot(posresult)
+plot(posresult,type='b',main='Posterior Density',xlab='theta')
+plot(posresult,type='l',main='Posterior Density',xlab='theta')
+plot(posresult,type='l',main='Posterior Density',xlab='theta',xlim=c(0,1))
+plot(posresult,type='l',main='Posterior Density',xlab='theta',xlim=c(0,1)*1000)
+hist(posresult)
+hist(seq(0,1,0.01),posresult)
+hist(,posresult)
+plot(posresult,type='l',main='Posterior Density',xlab='theta',xnat)
+plot(posresult,type='l',main='Posterior Density',xlab='theta',yaxt="n")
+plot(posresult,type='l',main='Posterior Density',xlab='theta',xaxt="n")
+plot(posresult,type='l',main='Posterior Density',xlab='Theta',xaxt="n",ylab='Posterior Density')
+plot(y=posresult,x=seq(0,1000,0.001),type='l',main='Posterior Density',xlab='Theta',ylab='Posterior Density')
+dim(posresult)
+levels(posresult)
+ls(posresult)
+posresult
+plot(y=posresult,x=seq(0,1,0.001),type='l',main='Posterior Density',xlab='Theta',ylab='Posterior Density')
+pdf("posterior_density.pdf")#
+plot(y=posresult,x=seq(0,1,0.001),type='l',main='Posterior Density',xlab='Theta',ylab='Posterior Density')#
+dev.off()
+prior <- function(theta){#
+	if (theta>=0 && theta<=0.385) {return(0.5)}#
+	if (theta>0.385 && theta<=0.485) {return(50*theta-18.75)}#
+	if (theta>0.485 && theta<=0.585) {return(-50*theta+29.75)}#
+	if (theta>0.585 && theta<=1) {return(0.5)}#
+}#
+#
+priorresult <- rep(NA,1001)#
+for(i in 1:1001){priorresult[i] <- prior((i-1)/1000)}#
+posterior <- function(theta,n,y){#
+	if (theta>=0 && theta<=0.5) {return(choose(n,y)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.385 & theta<=0.485) {return(choose(n,y)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.485 & theta<=0.585) {return(choose(n,y)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+	if (theta>0.585 & theta<=1) {return(choose(n,y)*prior(theta)*(theta^y)*(1-theta)^(n-y))}#
+#
+}#
+n=980#
+y=437#
+posresult <- rep(NA,1001)#
+ for(i in 1:1001){posresult[i] <- posterior((i-1)/1000,n,y)}#
+pdf("posterior_density.pdf")#
+plot(y=posresult,x=seq(0,1,0.001),type='l',main='Posterior Density',xlab='Theta',ylab='Posterior Density')#
+dev.off()
+76-80*exp(-0.3)-12
+76-80*exp(-0.1*2)-4
+80*exp(-0.1*2)
+qnorm(0,1,0.25)
+qnorm(0.25,0,1)
+qnorm(0.75,0,1)
+pnorm(0.25)
+qnorm(0.25)
+pnorm(1/4-qnorm(0.25)*sqrt(4/5))-pnorm(1/4+qnorm(0.25)*sqrt(4/5))
+sqrt(exp(ln(100)+0.12)*exp(0.2^2-1))
+exp(log(10))
+sqrt(exp(log(100)+0.12)*exp(0.2^2-1))
+exp(log(100)+0.12)
+setwd("~/GitHub/cycle3cvd-team7/wyc/python/")
+library("rPython")
+python.load("test.py")
+python.load("test.py")
+d1 <- 1/(sigma*sqrt(tau))*(log(s/k)+(r+sigma^2/2)*tau)
+s=50#
+k=52#
+r=0.5/100#
+sigma=0.35#
+tau=1/3#
+d1 <- 1/(sigma*sqrt(tau))*(log(s/k)+(r+sigma^2/2)*tau)
+d1
+d2 <- d1-sigma*sqrt(tau)
+d2
+delta <- pnorm(d1)-1
+delta
+gamma <- dnorm(d1)/(s*sigma*sqrt(tau))
+gamma
+v=s*dnorm(d1)*sqrt(tau)
+v
+theta <- -s*dnorm(d1)*sigma/(2*sqrt(tau))+r*k*exp(-r*tau)*pnorm()
+theta <- -s*dnorm(d1)*sigma/(2*sqrt(tau))+r*k*exp(-r*tau)*pnorm(d2)
+tehta
+theta
+theta <- -s*dnorm(d1)*sigma/(2*sqrt(tau))+r*k*exp(-r*tau)*pnorm(-d2)
+theta
+rho <- -k*tau*exp(-r*tau)*pnorm(-d2)
+rho
+p <- exp(-r*tau)*k*pnorm(-d2)
+p
+p <- exp(-r*tau)*k*pnorm(-d2)-s*pnorm(d1)
+p
+p <- exp(-r*tau)*k*pnorm(-d2)-s*pnorm(-d1)
+p
+theta+r*s*delta+0.5*sigma^2*s^2*gamma
+r*p
