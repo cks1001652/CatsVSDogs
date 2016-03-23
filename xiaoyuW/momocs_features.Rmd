@@ -1,5 +1,4 @@
 
-
 ```{r}
 library(data.table)
 library(lattice)
@@ -48,28 +47,45 @@ feature <- function(img_dir,img_name,data_name = NULL){
   n <- length(img_name)
   #n <- 50
   dat <- list()
+  
   for(i in 1:n){
+    
     if(trunc(i/5)*5==i){print(i)}
     #read images
-    #mat <- readImage(paste0(img_dir,img_name)[i]) #;display(mat)
-    mat_size <- resize(readImage(paste0(img_dir,img_name)[i]),128,128)
-    img <- channel(mat_size, mode="gray") #;display(img)
-    final_img <- thresh(img, w = 50, h = 50, offset = 0.05) #;display(final_img)
-    oc <- ocontour(bwlabel(final_img)) #;oc
+    img <- readImage(paste0(img_dir,img_name)[i]) #;display(mat)
+    img <- resize(img,128,128)
+    
+    # #High-pass Laplacian filtering
+    # f_high <- matrix(1, nc=3, nr=3)
+    # f_high[2,2] <- -8
+    # img <- filter2(img, f_high)
+    
+    #Adaptive thresholding
+    img <- channel(img, mode="gray") #;img
+    img <- thresh(img, w = 60, h = 60, offset=0.05) #;display(img)
+    img_2 <- opening(img, kern=makeBrush(11, shape='disc'))
+    img_3 <- opening(img, kern=makeBrush(5, shape='disc'))
+    img <- combine(img, img_2, img_3) #;display(img)
+    
+    # img <- resize(img,128,128)
+    oc <- ocontour(bwlabel(img)) #;oc
+    
     max <- c()
     for(j in 1:length(oc)){
      max[j] <- nrow(oc[[j]])
     }
+    
     #max
     #plot(oc[[which.max(max)]], type='l')
-    coo <- coo_sample(oc[[which.max(max)]], 40) #;coo
+    coo <- coo_sample(oc[[which.max(max)]], 50) #;coo
     #coo %>% coo_plot(points=TRUE)
     dat[[i]] <- coo
   }
   return(dat)
 }
 
-data <- feature(img_test_dir, testname)
+data_test <- feature(img_test_dir, testname)
+data_test
 
 ```
 
