@@ -98,7 +98,7 @@
 import cv2
 import numpy as np
 import os
-
+import time
 #############get image path###########
 # train_names = os.listdir(path)
 # train_names = train_names[1:len(train_names)]
@@ -118,6 +118,7 @@ def getimagedata(path):
   #   image_classes += [class_id]*len(class_path)
   #   class_id +=1
   return image_paths
+
 
 # sift extraction
 def siftprocessimage(image_paths):  
@@ -151,13 +152,25 @@ def train(descriptors,image_paths):
     featureset = getdata(detect,bow_extract,image_path)
     traindata.extend(featureset)
   return traindata
+
 #read result 
 
 
 path ='../data/'
+start=time.time()
 r1=getimagedata(path)
+end=time.time()
+print ((end-start))
+
+start=time.time()
 r2=siftprocessimage(r1)
+end=time.time()
+print ((end-start))
+
+start=time.time()
 r3=train(r2,r1)
+end=time.time()
+print ((end-start))
 
 f=open('feature.txt','w')
 for i in r3:

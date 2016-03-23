@@ -110,10 +110,10 @@ summary(tune.out)
 # 1   10 0.3274969 
 # 2  100 0.3157395 
 # 3  1000 0.3761188
-tune.out=tune(svm,data_train_sift_800,trainlabel,kernel="linear",ranges=list(cost=c(10,100,1000)))
+tune.out=svm(data_train_sift_800,trainlabel,kernel="linear",cross = 5)
 summary(tune.out)
 #n=7377,basedmodel_p=1000
 #n=7377,basedmodel_p=1000+
 #n=7377,basedmodel_p=1000
-
-feature_eval <- 
+# 
+# feature_eval <- 
