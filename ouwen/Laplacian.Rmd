@@ -1,0 +1,43 @@
+---
+title: "Laplacian"
+author: "Ouwen Sha"
+date: "March 21, 2016"
+output: html_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+```{r}
+
+#this is abandoned and replaced with harris corner dectection in OpenCV
+library(data.table)
+library(lattice)
+library(ggplot2)
+library(caret)
+library(Momocs)
+library(EBImage)
+
+#import images
+img_dir <- dir_images <- "C:/Users/ouwen/Desktop/images" #;dir_images
+dir_names <- list.files(dir_images)#;dir_names
+breed_name <- rep(NA, length(dir_names))
+
+
+
+img_test_dir <- img_train_dir <- "~/Desktop/project3/images/"
+img_name <- testname
+
+
+    #read images
+    img <- readImage(paste0(img_dir,img_name)[i]) #;display(mat)
+
+    
+    #High-pass Laplacian filtering
+    f_high <- matrix(1, nc=3, nr=3)
+    f_high[2,2] <- -8
+    img <- filter2(img, f_high)
+
+}
+
+```
