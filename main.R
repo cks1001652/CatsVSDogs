@@ -1,70 +1,98 @@
-#############################################
-### Main execution script for experiments ###
-#############################################
+setwd("~/GitHub/cycle3cvd-team7")
+library(data.table)
+library(caret)
+#Extract the class labels from the image name
+dir_images <- "./data"
+dir_names <- list.files(dir_images)
 
-### Author: Yuting Ma
-### Project 3
-### ADS Spring 2016
 
-### Specify directories
-setwd("./proj3_sample")
-
-img_train_dir <- "./data/zipcode_train/"
-img_test_dir <- "./data/zipcode_test/"
-
-### Import training images class labels
-label_train <- read.table("./data/zip_train_label.txt", header=F)
-label_train <- as.numeric(unlist(label_train) == "9")
-
-### Construct visual feature
-source("./lib/feature.R")
-
-tm_feature_train <- system.time(dat_train <- feature(img_train_dir, "img_zip_train"))
-tm_feature_test <- system.time(dat_test <- feature(img_test_dir, "img_zip_test"))
-save(dat_train, file="./output/feature_train.RData")
-save(dat_train, file="./output/feature_test.RData")
-
-### Train a classification model with training images
-source("./lib/train.R")
-source("./lib/test.R")
-
-### Model selection with cross-validation
-# Choosing between different values of interaction depth for GBM
-source("./lib/cross_validation.R")
-depth_values <- seq(3, 11, 2)
-err_cv <- array(dim=c(length(depth_values), 2))
-K <- 5  # number of CV folds
-for(k in 1:length(depth_values)){
-  cat("k=", k, "\n")
-  err_cv[k,] <- cv.function(dat_train, label_train, depth_values[k], K)
+breed_name <- rep(NA, length(dir_names))
+for(i in 1:length(dir_names)){
+  tt <- unlist(strsplit(dir_names[i], "_"))
+  tt <- tt[-length(tt)]
+  breed_name[i] = paste(tt, collapse="_", sep="")
 }
-save(err_cv, file="./output/err_cv.RData")
+cat_breed <- c("Abyssinian", "Bengal", "Birman", "Bombay", "British_Shorthair", "Egyptian_Mau",
+               "Maine_Coon", "Persian", "Ragdoll", "Russian_Blue", "Siamese", "Sphynx")
 
-# Visualize CV results
-pdf("./fig/cv_results.pdf", width=7, height=5)
-plot(depth_values, err_cv[,1], xlab="Interaction Depth", ylab="CV Error",
-     main="Cross Validation Error", type="n", ylim=c(0, 0.15))
-points(depth_values, err_cv[,1], col="blue", pch=16)
-lines(depth_values, err_cv[,1], col="blue")
-arrows(depth_values, err_cv[,1]-err_cv[,2],depth_values, err_cv[,1]+err_cv[,2], 
-      length=0.1, angle=90, code=3)
-dev.off()
+iscat <- breed_name %in% cat_breed
+y_cat <- as.numeric(iscat)
+iscat[iscat==TRUE] <- 1
+iscat[iscat==FALSE] <-2 
+label <- iscat
+label <- as.factor(label)
+#Sample test and train data 
+set.seed(14249)
+trainindex <- createDataPartition(label, p = .75,
+                                  list = FALSE,
+                                  times = 1)
+trainname <- dir_names[trainindex]
+testname <- dir_names[-trainindex]
+trainlabel <- as.factor(label[trainindex])
+testlabel <- as.factor(label[-trainindex])
+#data set sift
+set.seed(14249)
+trainindex <- createDataPartition(label, p = .75,
+                                  list = FALSE,
+                                  times = 1)
 
-# Choose the best parameter value
-depth_best <- depth_values[which.min(err_cv[,1])]
-par_best <- list(depth=depth_best)
+data_train_sift <- featurepy[trainindex,]
+data_test_sift <- featurepy[-trainindex,]
+trainlabel <- as.factor(label[trainindex])
+testlabel <- as.factor(label[-trainindex])
 
-# train the model with the entire training set
-tm_train <- system.time(fit_train <- train(dat_train, label_train, par_best))
-save(fit_train, file="./output/fit_train.RData")
 
+#Image Analysis Toll
+# source("https://bioconductor.org/biocLite.R")
+# biocLite("EBImage")
+library("EBImage")
+source("feature.R")
+
+#feature construction for train and test
+img_test_dir <- img_train_dir <- "./data/"
+
+tm_feature_train <- system.time(data_train <- feature(img_train_dir, trainname))
+tm_feature_test <- system.time(data_test <- feature(img_test_dir, testname))
+
+# tm_feature_train <- data_train
+# tm_feature_train <- cbind(tm_feature_train,label)
+save(data_train, file="./output/feature_train.RData")
+save(data_test, file="./output/feature_test.RData")
+load(file="./output/feature_train.RData")
+load(file="./output/feature_test.RData")
+data_train_sift_rgb <- cbind(data_train,data_train_sift)
+data_test_sift_rgb <- cbind(data_test,data_test_sift)
+# load(file="./output/feature_test.RData")
+#lsvm training 
+source("./train.R")
+tm_train <- system.time(fit_train <- train(data_train,trainlabel))
+#tm_trainsift <- system.time(fit_trainsift <- train(data_train_sift,trainlabel)) 
+#tm_trainsiftrgb <- system.time(fit_trainsiftrgb <- train(data_train_sift_rgb,trainlabel))
+save(fit_train,file="./output/fit_train.RData")
+ 
+source("./test.R")
 ### Make prediction 
-tm_test <- system.time(pred_test <- test(fit_train, dat_test))
+tm_test <- system.time(pred_test <- test(fit_train, data_test))
+#tm_testsift <- system.time(pred_testsift <- test(fit_trainsift,data_test_sift))
+#tm_testsiftrgb <- system.time(pred_testsiftrgb <- test(fit_trainsiftrgb,data_test_sift_rgb)) 
 save(pred_test, file="./output/pred_test.RData")
+load("./output/pred_test.RData")
+sum(pred_test==testlabel)/length(testlabel)
+# sum(pred_testsift==testlabel)/length(testlabel)
+# sum(pred_testsiftrgb==testlabel)/length(testlabel)
 
-### Summarize Running Time
-cat("Time for constructing training features=", tm_feature_train[1], "s \n")
-cat("Time for constructing testing features=", tm_feature_test[1], "s \n")
-cat("Time for training model=", tm_train[1], "s \n")
-cat("Time for making prediction=", tm_test[1], "s \n")
+library(rPython)
+python.load("~/GitHub/cycle3cvd-team7/wyc/python/test.py")
 
+featurepy <- read.csv("~/GitHub/cycle3cvd-team7/wyc/python/feature.txt", header=FALSE)
+featurepy$V1 <- gsub('[[]','',featurepy$V1)
+featurepy$V1 <- as.numeric(featurepy$V1)
+featurepy$V5 <- gsub('[]]','',featurepy$V5)
+featurepy$V5 <- as.numeric(featurepy$V5)
+str(featurepy)
+class(featurepy)
+sum(duplicated(featurepy[,1]))
+sum(duplicated(featurepy[,2]))
+sum(duplicated(featurepy[,3]))
+sum(duplicated(featurepy[,4]))
+sum(duplicated(featurepy[,5]))

@@ -1,5 +1,5 @@
-# Project CatsDogs: Predictive analytics-model evaluation and selection
-
+# Project CatsDogs: Predictive analytics-model evaluation and selection - group2
+author: yimin zhang,
 #### - for cats versus dogs image data
 
 Read [full project description](doc/project3_desc.md)
@@ -21,5 +21,15 @@ proj/
 ```
 
 Please see each subfolder for a README file.
+
+
+###  main.R 
+the baseline model use svm and RGB for feature. predictor rate about 66%
+the linear svm model use sift
+
+### base_hsv
+there is another baseline model with simillar predictor rate use HSV, this is reasonable because HSV is transfor from RGB.
+there is also a model.R document, which has run different model use HSV for feature. But none of them work well. And the logistic regression shows that this feature has the linear boundary. So linear svm should work.
+
 
 
